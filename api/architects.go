@@ -13,6 +13,23 @@ func GetEvent(ctx *gin.Context){
 
 }
 
+
+type CreateUser struct{
+	Name string
+	Password string
+}
+
+func createArchitect(ctx *gin.Context){
+	// randInt, err := rand.Int(rand.Reader, 300000)
+	var user CreateUser
+	ctx.BindJSON(&user)
+	dao.DB.Create(&model.User{Password: user.Password, //for fuck sake change this to hash
+		User: user.Name,
+		Role: 0,
+		Profileid: 0, // dono
+	})
+}
+
 func CreateEvent(ctx *gin.Context, user *model.User){
 	var event Event
 	err := ctx.BindJSON(&event)
