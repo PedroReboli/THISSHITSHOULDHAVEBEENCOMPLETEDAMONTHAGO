@@ -89,9 +89,10 @@ func Login(ctx *gin.Context){
 	
 }
 
-func RegisterRoutes(){
+func RegisterRoutes() *gin.Engine{
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
 	r.POST("/update", IsLogged(RequireRole(CreateEvent, 1)))
+	return r
 }

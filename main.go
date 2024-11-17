@@ -2,5 +2,6 @@ package main
 
 import "server/api"
 func main(){
-	api.RegisterRoutes()
+	route := api.RegisterRoutes() 
+	route.Run(":8080")
 }

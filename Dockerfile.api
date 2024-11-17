@@ -1,8 +1,10 @@
 FROM golang:1.23
-WORKDIR /usr/src/app
-COPY ./app/api/go/go.mod ./app/api/go/go.sum ./
+WORKDIR /usr/src/server
+COPY ./go.mod ./go.sum ./
 RUN go mod download && go mod verify
 #cache install
-RUN go build -v std 
-COPY ./app/api/go .
+# RUN go build -v std 
+COPY ./api ./api
+COPY ./dao ./dao
+COPY ./main.go ./
 RUN go build -v -o /usr/local/bin/ ./...
