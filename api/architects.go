@@ -19,7 +19,7 @@ type CreateUser struct{
 	Password string
 }
 
-func createArchitect(ctx *gin.Context){
+func CreateArchitect(ctx *gin.Context){
 	// randInt, err := rand.Int(rand.Reader, 300000)
 	var user CreateUser
 	ctx.BindJSON(&user)

@@ -93,6 +93,8 @@ func RegisterRoutes() *gin.Engine{
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	r.POST("/update", IsLogged(RequireRole(CreateEvent, 1)))
+	r.POST("/createCampaign", IsLogged(RequireRole(CreateEvent, 1)))
+	r.POST("/deleteCampaign", IsLogged(RequireRole(RemoveEvent, 1)))
+	r.POST("/SigninArchitect", CreateArchitect)
 	return r
 }
