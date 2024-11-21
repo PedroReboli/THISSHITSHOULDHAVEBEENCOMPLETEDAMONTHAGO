@@ -189,3 +189,32 @@ def UnApplyEvent():
             return
         db["Events"][i]["subscriptions"].remove(user["id"])
     save_DB(db)
+    
+@app.post("/getCampaings")
+def getCampaings():
+    req = request.json
+    userToken = req["userToken"]
+    user = GetUserByToken(userToken)
+    db = open_DB()
+    [{"name":c["name"],
+      "id":c["id"],
+      "description":c["description"],
+      "isSubscribed":user["id"] in c["subscriptions"]
+      }
+        for c in db["campaigns"]]
+
+
+@app.post("/getEvents")
+def getCampaings():
+    req = request.json
+    userToken = req["userToken"]
+    user = GetUserByToken(userToken)
+    db = open_DB()
+    [{"name":c["name"],
+      "id":c["id"],
+      "description":c["description"],
+      "date":c["date"],
+      "local":c["local"],
+      "isSubscribed":user["id"] in c["subscriptions"]
+      }
+        for c in db["Events"]]
